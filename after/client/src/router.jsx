@@ -5,7 +5,8 @@ import { TodoListRoute } from "./pages/TodoList";
 import { postRoute } from "./pages/Post";
 import { RootLayout } from "./layouts/RootLayout";
 import { userRoute } from "./pages/User";
-// import axios from "axios";
+import { newPostRoute } from "./pages/NewPost";
+import { editPostRoute } from "./pages/EditPost";
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +24,14 @@ export const router = createBrowserRouter([
                 index: true,
                 ...postListRoute,
               },
-              { path: ":postId", ...postRoute },
+              {
+                path: ":postId",
+                children: [
+                  { index: true, ...postRoute },
+                  { path: "edit", ...editPostRoute },
+                ],
+              },
+              { path: "new", ...newPostRoute },
             ],
           },
           {

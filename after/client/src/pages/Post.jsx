@@ -8,7 +8,11 @@ function Post() {
   return (
     <>
       <h1 className="page-title">{post.title}</h1>
-
+      <div className="title-btns">
+        <Link className="btn btn-outline" to="edit">
+          Edit
+        </Link>
+      </div>
       <span className="page-subtitle">
         By: <Link to={`users/${user.id}`}>{user.name}</Link>
       </span>
@@ -30,10 +34,6 @@ function Post() {
     </>
   );
 }
-
-// function loader({ request: { signal }, params }) {
-//   return getPost(params.postId, { signal });
-// }
 
 async function loader({ request: { signal }, params: { postId } }) {
   const comments = getComments(postId, { signal });

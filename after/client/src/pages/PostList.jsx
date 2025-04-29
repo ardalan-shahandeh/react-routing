@@ -1,45 +1,85 @@
-import { useLoaderData } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { Form, Link, useLoaderData } from "react-router-dom";
 import { getPosts } from "../api/posts";
+import { getUsers } from "../api/users";
 import { PostCard } from "../components/PostCard";
+import { FormGroup } from "../components/FormGroup";
 
 function PostList() {
-  const posts = useLoaderData();
+  const {
+    posts,
+    users,
+    searchParams: { query, userId },
+  } = useLoaderData();
+
+  const queryRef = useRef();
+  const userIdRef = useRef();
+
+  useEffect(() => {
+    queryRef.current.value = query || "";
+  }, [query]);
+
+  useEffect(() => {
+    userIdRef.current.value = userId || "";
+  }, [userId]);
 
   return (
     <>
-      <h1 className="page-title">Posts</h1>
+      <h1 className="page-title">
+        Posts
+        <div className="title-btns">
+          <Link className="btn btn-outline" to="new">
+            New
+          </Link>
+        </div>
+      </h1>
+
+      <Form className="form mb-4">
+        <div className="form-row">
+          <FormGroup>
+            <label htmlFor="query">Query</label>
+            <input type="search" name="query" id="query" ref={queryRef} />
+          </FormGroup>
+
+          <FormGroup>
+            <label htmlFor="userId">Author</label>
+            <select type="search" name="userId" id="userId" ref={userIdRef}>
+              <option value="">Any</option>
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </select>
+          </FormGroup>
+
+          <button className="btn">Filter</button>
+        </div>
+      </Form>
 
       <div className="card-grid">
         {posts.map((post) => {
-          return (
-            // <div key={post.id} className="card">
-            //   <div className="card-header">{post.title}</div>
-            //   <div className="card-body">
-            //     <div className="card-preview-text">{post.body}</div>
-            //   </div>
-            //   <div className="card-footer">
-            //     <Link className="btn" to={`/posts/${post.id}`}>
-            //       View
-            //     </Link>
-            //   </div>
-            // </div>
-
-            <PostCard key={post.id} {...post} />
-          );
+          return <PostCard key={post.id} {...post} />;
         })}
       </div>
     </>
   );
 }
 
-// function loader({ request: { signal } }) {
-//   return axios
-//     .get("http://localhost:3000/posts", { signal })
-//     .then((res) => res.data);
-// }
+async function loader({ request: { signal, url } }) {
+  const searchParams = new URL(url).searchParams;
+  const query = searchParams.get("query");
+  const userId = searchParams.get("userId");
+  const filterParams = { q: query };
+  if (userId !== "") filterParams.userId = userId;
 
-function loader({ request: { signal } }) {
-  return getPosts(signal);
+  const posts = getPosts({ signal, params: filterParams });
+  const users = getUsers({ signal });
+  return {
+    posts: await posts,
+    users: await users,
+    searchParams: { query, userId: userId || "" },
+  };
 }
 
 export const postListRoute = {

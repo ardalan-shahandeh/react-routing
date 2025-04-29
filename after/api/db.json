@@ -4003,7 +4003,6 @@
       "body": "perspiciatis quis doloremque\nveniam nisi eos velit sed\nid totam inventore voluptatem laborum et eveniet\naut aut aut maxime quia temporibus ut omnis"
     }
   ],
-
   "photos": [
     {
       "albumId": 1,
@@ -39006,7 +39005,6 @@
       "thumbnailUrl": "https://via.placeholder.com/150/6dd9cb"
     }
   ],
-
   "posts": [
     {
       "userId": 1,
@@ -39597,16 +39595,40 @@
       "body": "doloremque ex facilis sit sint culpa\nsoluta assumenda eligendi non ut eius\nsequi ducimus vel quasi\nveritatis est dolores"
     },
     {
-      "userId": 10,
-      "id": 99,
       "title": "temporibus sit alias delectus eligendi possimus magni",
-      "body": "quo deleniti praesentium dicta non quod\naut est molestias\nmolestias et officia quis nihil\nitaque dolorem quia"
+      "body": "quo deleniti praesentium dicta non quod\naut est molestias\nmolestias et officia quis nihil\nitaque dolorem quia",
+      "userId": "1",
+      "id": 99
     },
     {
       "userId": 10,
       "id": 100,
       "title": "at nam consequatur ea labore ea harum",
       "body": "cupiditate quo est a modi nesciunt soluta\nipsa voluptas error itaque dicta in\nautem qui minus magnam et distinctio eum\naccusamus ratione error aut"
+    },
+    {
+      "title": "123",
+      "body": "213",
+      "userId": "3",
+      "id": 101
+    },
+    {
+      "title": "asdasd",
+      "body": "asdasd",
+      "userId": "1",
+      "id": 102
+    },
+    {
+      "title": "asdasd",
+      "body": "123123123",
+      "userId": "1",
+      "id": 103
+    },
+    {
+      "title": "xffg",
+      "body": "dfg",
+      "userId": "4",
+      "id": 104
     }
   ],
   "todos": [
@@ -40811,7 +40833,6 @@
       "completed": false
     }
   ],
-
   "users": [
     {
       "id": 1,
